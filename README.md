@@ -1,43 +1,38 @@
-# Rate Limiting Microservice
+# RateGuard
 
-![License](https://img.shields.io/badge/license-MIT-blue.svg)
+A distributed rate-limiting microservice for enforcing fair, configurable request limits on APIs and external-facing services.
 
-## Table of Contents
+## What it does
 
-- [Introduction](#introduction)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-  - [Installation](#installation)
+RateGuard sits in front of a service and enforces rate limits on incoming requests, so a single client can't crowd out everyone else or abuse an endpoint.
 
-## Introduction
+- **Multiple rate-limiting algorithms** — modular design, so the limiting strategy can be swapped per use case
+- **Dynamic configuration** — limits can be adjusted without redeploying
+- **Redis-backed caching** — limit state is kept in Redis for fast checks and shared state across instances
+- **Authentication and authorization** — secured endpoints for managing limits
+- **Monitoring and metrics** — visibility into limiting activity
 
-The Rate Limiting Microservice is a highly customizable service for enforcing rate limits on incoming requests from external services. It offers various rate limiting algorithms and configurations to meet the specific needs of your application, ensuring fair access and preventing abuse.
+## Tech stack
 
-## Features
+- Java / Spring Boot
+- Redis
+- REST APIs
 
-- Modular architecture with support for multiple rate limiting algorithms.
-- Dynamic rate limiting configurations.
-- Secure authentication and authorization mechanisms.
-- Caching using Redis for improved response times.
-- Monitoring and metrics to track rate limiting activity.
-- High availability and scalability for reliable service.
+## Getting started
 
-## Prerequisites
+Prerequisites: JDK 8 or later, a Spring Boot development environment, and a Redis server.
 
-Before you begin, ensure you have met the following requirements:
+```shell
+git clone https://github.com/Arth1994/rateguard.git
+cd rateguard
+```
 
-- Java Development Kit (JDK) 8 or later.
-- Spring Boot development environment.
-- Redis server for caching (if applicable).
+Configure your Redis connection and rate-limit rules, then build and run with Maven or Gradle as a standard Spring Boot application.
 
-## Getting Started
+## Why I built it
 
-Follow these steps to get your Rate Limiting Microservice up and running.
+Rate limiting is one of those problems that looks trivial until it has to work across instances under real traffic. This project is my exploration of the design trade-offs: algorithm choice, shared state in Redis, and keeping the check fast enough to sit on the request path.
 
-### Installation
+## License
 
-1. Clone the repository:
-
-   ```shell
-   git clone https://github.com/yourusername/rate-limiting-microservice.git
+MIT
